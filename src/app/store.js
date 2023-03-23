@@ -12,4 +12,5 @@ export const store = configureStore({
     auth: messagesSliceReducer,
   },
   devTools: !process.env.NODE_ENV === "production",
+  middleware: getDefaultMiddlewares().concat(apiSlice.middleware),
 });
