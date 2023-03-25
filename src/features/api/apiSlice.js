@@ -1,9 +1,9 @@
-import { createApi, fakeBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fakeBaseQuery({
-    baseQuery: process.env.REACT_APP_API_URL,
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.REACT_APP_API_URL,
   }),
   tagTypes: [],
   endpoints: (builder) => ({}),

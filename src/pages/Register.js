@@ -27,8 +27,10 @@ export default function Register() {
   };
 
   useEffect(() => {
-    console.log(data);
-    console.log(error);
+    if (error?.data) {
+      setErrorMessage(error.data);
+    }
+    console.log("data", data);
   }, [data, error]);
 
   return (
