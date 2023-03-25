@@ -5,6 +5,24 @@
       "password": "$2a$10$j5m68rvZFl6xKt8dxrpOoOZy/1edw790kQRIUG94Sj.OS/YjZ9Xpm",
       "name": "Shayem Hossain",
       "id": 1
+    },
+    {
+      "email": "shayem15-12011@diu.edu.bd",
+      "password": "$2a$10$UZIMP6PmhbIAMIeFgmwOXOnuAug1A9MGPRYqjjtFvl5fnbNPilRmu",
+      "name": "Shayem Hossain",
+      "id": 2
+    },
+    {
+      "email": "panda@gmail.com",
+      "password": "$2a$10$PLihrJ0WJ8z3rWpFbx4bcuMNnmEetvmDmHbb0h63RNUu88O9Uc0zC",
+      "name": "Shayem Hossain",
+      "id": 3
+    },
+    {
+      "email": "niam@gmail.com",
+      "password": "$2a$10$s9FGG1SGNt/wk7OcfKHLVeFkImBEGdvasKEO65XYowHHx5LUT3VWy",
+      "name": "Niam ",
+      "id": 4
     }
   ],
   "conversations": [
