@@ -1,13 +1,30 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
+import { useRegisterMutation } from "../features/auth/authApi";
+import Error from "../components/ui/Error";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [agreed, setAgreed] = useState("");
+  const [agreed, setAgreed] = useState(false);
+  const [error, setError] = useState("");
+
+  //calling mution from authSlice
+  const [register, { data, isLoading, isError }] = useRegisterMutation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (confirmPassword !== password) {
+      setError("Password don't match");
+    } else {
+      register(name, email, password);
+    }
+  };
 
   return (
     <div className="grid place-items-center h-screen bg-[#F9FAFB">
@@ -25,8 +42,7 @@ export default function Register() {
               Create your account
             </h2>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
-            <input type="hidden" name="remember" value="true" />
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label htmlFor="name" className="sr-only">
@@ -103,8 +119,9 @@ export default function Register() {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
+                  required
                   className="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 rounded"
-                  checked={name}
+                  checked={agreed}
                   onChange={(e) => setAgreed(e.target.value)}
                 />
                 <label
@@ -125,6 +142,8 @@ export default function Register() {
                 Sign up
               </button>
             </div>
+
+            {error !== "" && <Error message={error}></Error>}
           </form>
         </div>
       </div>
