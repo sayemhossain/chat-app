@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 import { useRegisterMutation } from "../features/auth/authApi";
 import Error from "../components/ui/Error";
@@ -12,8 +12,20 @@ export default function Register() {
   const [agreed, setAgreed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  //For redirection
+  const navigate = useNavigate();
+
   //calling mution from authSlice
   const [register, { data, isLoading, isError, error }] = useRegisterMutation();
+
+  useEffect(() => {
+    if (error?.data) {
+      setErrorMessage(error.data);
+    }
+    if (data?.accessToken && data?.user) {
+      navigate("/inbox");
+    }
+  }, [data, error, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,13 +37,6 @@ export default function Register() {
       register({ name, email, password });
     }
   };
-
-  useEffect(() => {
-    if (error?.data) {
-      setErrorMessage(error.data);
-    }
-    console.log("data", data);
-  }, [data, error]);
 
   return (
     <div className="grid place-items-center h-screen bg-[#F9FAFB">
