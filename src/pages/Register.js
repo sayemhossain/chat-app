@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 import { useRegisterMutation } from "../features/auth/authApi";
@@ -10,21 +10,26 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreed, setAgreed] = useState(false);
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   //calling mution from authSlice
-  const [register, { data, isLoading, isError }] = useRegisterMutation();
+  const [register, { data, isLoading, isError, error }] = useRegisterMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
+    setErrorMessage("");
 
     if (confirmPassword !== password) {
-      setError("Password don't match");
+      setErrorMessage("Password don't match");
     } else {
-      register(name, email, password);
+      register({ name, email, password });
     }
   };
+
+  useEffect(() => {
+    console.log(data);
+    console.log(error);
+  }, [data, error]);
 
   return (
     <div className="grid place-items-center h-screen bg-[#F9FAFB">
@@ -144,7 +149,7 @@ export default function Register() {
               </button>
             </div>
 
-            {error !== "" && <Error message={error}></Error>}
+            {errorMessage !== "" && <Error message={errorMessage}></Error>}
           </form>
         </div>
       </div>
